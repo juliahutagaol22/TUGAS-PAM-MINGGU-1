@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tabel Grade Penilaian</title>
+</head>
+<body>
+
+	<h1 align="center">Tabel Grade Penilaian</h1>
+	<hr> <br>
+
+	<table border="1" align="center">
+		<thead align="center" style="background: deepskyblue;">
+			<td width="40px" height="30px">NO</td>
+			<td width="170px">Nama</td>
+			<td width="150px">NIM</td>
+			<td width="100px">Nilai</td>
+			<td width="80px">Grade</td>
+		</thead>
+
+		<tbody id="IsiData" align="center">
+			
+		</tbody>
+	</table>
+
+	<br>
+	<footer align="center">
+		<p>copyright &copy Juliawati Hutagaol | 119140016</p>
+	</footer>
+</body>
+</html>
+
+<script type="text/javascript">
+
+	let data = [
+		["Juliawati Hutagaol","Andi","Budi","Chika","Doni","Elsa","Firhan","Ghani","Hani","Icha","Joni","Kinan","Leo","Mona","Nona","Oppa","Parto"],
+		[119140016,119140001,119140002,119140003,119140004,119140005,119140006,119140007,119140008,119140009,119140010,119140011,119140012,119140013,119140014,119140015,119140017],
+		[90,61,58,60,44,86,86,55,78,0,65,85,20,77,83,54,40]
+	]
+
+	// Hitung Grade Nilai
+	let grade = data[2].map(nilai => {	
+			if (nilai >= 80) {
+				return "A"
+			}else if( nilai>=70){
+				return "AB"
+			}else if( nilai>=60){
+				return "B"
+			}else if( nilai>=50){
+				return "BC"
+			}else if( nilai>=40){
+				return "C"
+			}else if( nilai>=10){
+				return "D"
+			}else{
+				return "E"
+			}
+	})
+
+	// Menggabungkan Grade dengan Data yang ada
+	data.push(grade)
+
+	// Menampilkan Data Pada HTML
+	output = (nama, nim, nilai, grade) => {
+		let output_HTML = ``;
+		for (var i = 0; i<grade.length; i++) {
+			// Memberikan Warna Abu-abu
+			let warna_abuabu = ``;
+			if (i%2 != 0){ 
+				warna_abuabu = `style='background: gainsboro;'`;
+			}
+
+			// Menggabungkan data dan HTML
+			output_HTML += `<tr ${(warna_abuabu)}>
+								<td> ${(i+1)} </td>
+								<td> ${(nama[i])} </td>
+								<td> ${(nim[i])} </td>
+								<td> ${(nilai[i])} </td>
+								<td> ${(grade[i])} </td>
+							</tr>
+							`
+		}
+		// Melakukan inner HTML
+		document.getElementById("IsiData").innerHTML =  output_HTML;
+	}
+
+	output(...data);
+</script>
